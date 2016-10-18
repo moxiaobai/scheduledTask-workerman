@@ -1,0 +1,137 @@
+{{include file="common/page_header.html"}}
+
+<p class="lead" style="padding-left:15px;">
+    当前操作用户:{{$smarty.const.U_REALNAME}}
+</p>
+
+<ul class="breadcrumb">
+    <li><a href="/">首页</a> <span class="divider">/</span></li>
+    <li><a href="/index/addCron/">添加计划任务</a> <span class="divider">/</span></li>
+    <li><a href="/index/help/">计划任务说明</a> <span class="divider">/</span></li>
+</ul>
+
+<!-- 搜索区域 -->
+<form class="form-inline pull-left" action="/index/">
+    <div class="form-group">
+        <input type="text"  name="id" value="{{$id}}" class="input-small form-control" placeholder="任务ID">
+        <input type="text" name="title" value="{{$title}}" class="input-big form-control" placeholder="任务标题">
+        <input type="text" name="content" value="{{$content}}" class="input-big form-control" placeholder="任务内容">
+        {{$directorOption}}
+        {{$status}}
+        {{$state}}
+        <button type="submit" class="btn">搜索</button>
+    </div>
+</form>
+
+<div class="clear10"></div>
+
+<!-- 内容区域 -->
+<table class="table table-striped table-condensed table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>负责人</th>
+        <th>任务标题</th>
+        <th>任务类型</th>
+        <th>执行程序</th>
+        <th>任务时间</th>
+        <th>运行状态</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{if $data}}
+    {{foreach from=$data item=row}}
+    <tr>
+        <td>{{$row.c_id}}</td>
+        <td>{{$director[$row.d_id]}}</td>
+        <td>{{$row.c_title}}</td>
+        <td>
+            {{if $row.c_persistent == 1}}<span class="label label-success">循环执行</span><br />
+            开始时间: {{$row.c_start_time|date_format:"%Y-%m-%d %H:%M:%S"}} - 结束时间: {{$row.c_end_time|date_format:"%Y-%m-%d %H:%M:%S"}}<br />
+            间隔执行时间: {{$row.c_interval/60}}（分钟）
+            {{else if $row.c_persistent == 2}}
+            <span class="label label-info">每天执行一次</span><br />
+            每天执行时间：{{$row.c_execute_time|date_format:"%H:%M"}}<br />
+            开始时间: {{$row.c_start_time|date_format:"%Y-%m-%d %H:%M:%S"}} - 结束时间: {{$row.c_end_time|date_format:"%Y-%m-%d %H:%M:%S"}}<br />
+            {{else}}
+            <span class="label label-important">只执行一次</span><br />
+            任务执行时间：{{$row.c_execute_time|date_format:"%Y-%m-%d %H:%M"}}
+            {{/if}}
+        </td>
+        <td>
+            {{if $row.c_type == 1}}<span class="badge badge-success">Curl方式运行</span>{{else}}<span class="badge badge-info">Cli方式运行</span>{{/if}}<br />
+            {{$row.c_content}}
+        </td>
+        <td>
+            <span class="label label-success">启动时间:</span>{{$row.c_run_time}}&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-important">停止时间:</span>{{$row.c_stop_time}}<br />
+            <span class="label label-info">添加时间:</span>{{$row.c_addtime}}&nbsp;&nbsp;&nbsp;&nbsp;<span class="label label-warning">编辑时间:</span>{{$row.c_update_time}}<br />
+        </td>
+        <td>
+            {{if $row.c_state == 2}}
+            <span class="label label-success">正常运行</span>
+            {{else}}
+            <span class="label label-warning">未运行</span>
+            {{/if}}
+        </td>
+        <td>
+            {{if $row.c_status == 1}}
+            <span class="label label-success">正常</span>
+            {{else}}
+            <span class="label label-warning">禁用</span>
+            {{/if}}
+        </td>
+        <td>
+            {{if $row.c_state == 1}}
+            <a data-href="/index/startCron/?id={{$row.c_id}}" data-json="确认要启动该任务吗？" title="启动任务"><i class="icon-play-circle"></i>启动 </a>&nbsp;
+            <a href="/index/addCron/?id={{$row.c_id}}" title="编辑任务"><i class="icon-edit"></i>编辑</a>&nbsp;
+            {{else}}
+            <a data-href="/index/stopCron/?id={{$row.c_id}}" data-json="确认要停止该任务吗？" title="停止任务"><i class="icon-off"></i>暂停</a>&nbsp;
+            {{/if}}
+            <a href="/index/log/?id={{$row.c_id}}"  title="任务日志"><i class="icon-th-list"></i>任务日志</a>&nbsp;
+            <a href="/index/alarm/?id={{$row.c_id}}"  title="任务日志"><i class="icon-bullhorn"></i>报警日志</a>
+            <!--<a href="/system/cron/trash/id/{{$row.s_id}}"  title="移除任务"><i class="icon-trash"></i>移除</a>-->
+        </td>
+    </tr>
+    {{/foreach}}
+    {{/if}}
+    </tbody>
+</table>
+
+<div class="pagination pagination-small">
+    <ul class="pull-right">{{$page}}<a class="current">总记录：{{$total}}</a></ul>
+    <div class="clear"></div>
+</div>
+<script>
+    $(function () {
+        $('.pagination ul a').each( function() {
+            $(this).hasClass('current') ? $(this).wrap('<li class="disabled" />') : $(this).wrap('<li />');
+        });
+
+        $("[data-json]").bind('click', function() {
+            var url   = $(this).attr('data-href');
+            var msg   = $(this).attr('data-json');
+
+            swal({
+                    title: msg,
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                    closeOnConfirm: false
+                },
+                function(){
+                    $.getJSON(url, function(json) {
+                        swal({   title: json.info,timer: 2000 });
+                        if ( json.status == 'y' )
+                            setTimeout( function() {window.location.reload()}, 1000);
+                    });
+                });
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+2016-09-23 17:54:42 Workerman[start.php] Stopping ...
+2016-09-23 17:54:44 Workerman[start.php] has been stopped
+2016-09-23 18:06:43 Workerman[start.php] start in DEBUG mode
+2016-09-23 18:06:45 Workerman[start.php] Stopping ...
+2016-09-23 18:06:47 worker[none:3427] exit with status 9
+2016-09-23 18:06:47 Workerman[start.php] has been stopped
+2016-09-23 18:15:43 Workerman[start.php] start in DEBUG mode
+2016-09-23 18:17:04 Workerman[start.php] Stopping ...
+2016-09-23 18:17:06 worker[none:3431] exit with status 9
+2016-09-23 18:17:06 Workerman[start.php] has been stopped
+2016-09-23 18:35:46 Workerman[start.php] start in DEBUG mode
+2016-09-26 10:13:01 WORKER EXIT UNEXPECTED 
+2016-09-26 11:17:48 Workerman[start.php] start in DEBUG mode
+2016-09-29 08:54:19 WORKER EXIT UNEXPECTED 

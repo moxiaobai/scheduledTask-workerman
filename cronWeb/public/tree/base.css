@@ -1,0 +1,43 @@
+/* Tree */
+.tree div div { background:url(tree.png) no-repeat;}
+.tree .folder_collapsable, .tree .folder_expandable, .tree .file { background:url(folder.png) no-repeat;}
+.tree .checked, .tree .unchecked, .tree .indeterminate { background:url(check.png) no-repeat;}
+.tree ul { background:#FFF;}
+.tree li a, .tree li span { color:#15428B;}
+.tree .hover { background:#f5f5f5;}
+.tree .selected { background-color:#e8edf3;}
+
+/* Tree */
+.tree li { clear:both; display:block; line-height:22px; cursor:pointer;}
+.tree div, .tree a, .tree span { height:22px; line-height:22px;}
+.tree div { display:block; overflow:hidden;}
+.tree div div { float:left; display:block; overflow:hidden; width:22px; height:22px; border:none; background-position:0 -100px;}
+.tree a, .tree a:hover { text-decoration:none;}
+
+.tree .collapsable { background-position:0 -300px;}
+.tree .first_collapsable { background-position:0 -250px;}
+.tree .last_collapsable { background-position:0 -350px;}
+
+.tree .expandable { background-position:0 -100px;}
+
+.tree .first_expandable { background-position:0 -50px;}
+.tree .last_expandable { background-position:0 -150px;}
+.tree .end_expandable { background-position:0 0;}
+.tree .end_collapsable { background-position:0 -200px;}
+
+.tree .indent { background:none;}
+.tree .line { background-position:0 -400px;}
+.tree .node { background-position:0 -450px;}
+.tree .last .node { background-position:0 -500px;}
+
+.tree .folder_expandable { background-position:0 0;}
+.tree .folder_collapsable { background-position:0 -50px;}
+.tree .file { background-position:0 -100px;}
+
+.tree .unchecked { background-position:0 0;}
+.tree .hover .unchecked { background-position:0 -50px;}
+.tree .checked { background-position:0 -100px;}
+.tree .hover .checked { background-position:0 -150px;}
+.tree .indeterminate { background-position:0 -200px;}
+.tree .hover .indeterminate { background-position:0 -250px;}
+.tree ul{margin:0px;}

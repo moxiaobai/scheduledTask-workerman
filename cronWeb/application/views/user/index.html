@@ -1,0 +1,135 @@
+{{include file="common/page_header.html"}}
+
+<p class="lead" style="padding-left:15px;">
+    当前操作用户:{{$smarty.const.U_REALNAME}}
+</p>
+
+<!--搜索区域-->
+<form class="form-inline pull-left">
+    <div class="form-group">
+        <input type="text" name="username" value="{{$username}}" class="form-control" placeholder="用户名">
+        <button type="submit" class="btn btn-default">搜索</button>
+    </div>
+</form>
+<button type="button" class="btn btn-default pull-right" onclick="window.location.reload();">刷新界面</button>
+<button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target="#adminModal" href="/user/form/">添加管理员</button>
+
+<div class="clear10"></div>
+
+<!-- 表格 -->
+<table class="table table-bordered table-striped">
+    <tr>
+        <td>用户名</td>
+        <td>真实姓名</td>
+        <td>角色</td>
+        <td>状态</td>
+        {{if $smarty.const.U_ROLE == 2}}<td>修改密码</td>{{/if}}
+        <td>添加时间</td>
+        <td>操作</td>
+    </tr>
+    {{if $data}}
+    {{foreach from=$data item=row}}
+    <tr>
+        <td>{{$row.u_username}}</td>
+        <td>{{$row.u_realname}}</td>
+        <td>{{if $row.u_role==2}}<span class="label label-important">{{if $row.u_id == $smarty.const.UID}}当前{{/if}}系统管理员</span>{{else}}<span class="label label-info">普通管理员</span>{{/if}}</td>
+        <td>
+            <a href="#" data-json="确认要更改状态吗？" data-href="/user/status/id/{{$row.u_id}}/status/{{$row.u_status}}">
+                <i class="{{if $row.u_status == 1}}icon-eye-open{{else}}icon-eye-close{{/if}}" title="{{if $row.u_status == 2}}禁用{{else}}正常{{/if}}"></i>
+                {{if $row.u_status == 1}}<span class="label label-success">正常</span>{{else}}<span class="label label-warning">禁用</span>{{/if}}
+            </a>
+        </td>
+        {{if $smarty.const.U_ROLE == 2}}
+        <td>
+            <a data-toggle="modal" href="/user/formPassword/id/{{$row.u_id}}" data-target="#formPasswordModal" title="修改密码"><i class="icon-lock"></i></a>
+        </td>
+        {{/if}}
+        <td>{{$row.u_addtime}}</td>
+        <td>
+            <a class="icon-cog" data-toggle="modal" data-target="#adminModal" href="/user/form/id/{{$row.u_id}}" title="编辑用户"></a>&nbsp;&nbsp;
+        </td>
+    </tr>
+    {{/foreach}}
+    {{/if}}
+</table>
+
+<!-- 分页 -->
+{{if $data}}
+<div class="pagination pagination-right">
+    <ul>{{$pageHtml}}</ul>
+</div>
+{{/if}}
+</div>
+
+<!--弹窗-->
+<form class="form-horizontal" action="/user/save/" method="post">
+    <div class="modal fade" id="adminModal" tabindex="-1" role="dialog"></div>
+</form>
+
+<form class="form-horizontal" method="post" action="/user/editPassword/" >
+    <div class="modal fade" id="formPasswordModal" tabindex="-1" role="dialog"></div>
+</form>
+
+<script src="/public/tree/Validform_v5.3.2_min.js"></script>
+<script>
+    $(function() {
+        $("[data-json]").bind('click', function() {
+            var url   = $(this).attr('data-href');
+            var msg   = $(this).attr('data-json');
+            swal({
+                        title: msg,
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#DD6B55",
+                        confirmButtonText: "确定",
+                        cancelButtonText: "取消",
+                        closeOnConfirm: false
+                    },
+                    function(){
+                        $.getJSON(url, function(json) {
+                            swal({   title: json.info,timer: 2000 });
+                            if ( json.status == 'y' )
+                                setTimeout( function() {window.location.reload()}, 1000);
+                        });
+                    });
+
+        });
+
+        $("[data-toggle='modal']").bind('click', function(){
+            var target = $(this).attr('data-target');
+            var url    = $(this).attr('href');
+            if ( url != 'undefined') {
+                $(target).load(url);
+            }
+        });
+
+        //重新分页样式
+        $('.pagination a').each( function() {
+            $(this).hasClass('current') ? $(this).wrap('<li class="disabled" />') : $(this).wrap('<li />');
+        });
+
+        $(".form-horizontal").Validform({
+            ajaxPost: true,
+            tipSweep: true,
+            tiptype:function(msg,o,cssctl){
+                if ( o.type == 3 ) {
+                    o.obj.next('.help-inline').html(msg).addClass('Validform_error');
+                } else {
+                    o.obj.next('.help-inline').html('').addClass('Validform_success');
+                }
+            },
+            callback:function(json){
+                var alert = $('.alert').eq(0);
+                alert.show();
+                if ( json.status == 'y' ) {
+                    alert.removeClass('alert-danger').addClass('alert-success').children('strong').html(json.info);
+                    setTimeout( function() {window.location.reload()}, 1000);
+                } else {
+                    alert.addClass('alert-danger').children('strong').html(json.info);
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<div class="span2">
+	<ul class="nav nav-pills nav-stacked">
+      <li {{if $type=='code'}}class="active"{{/if}}>
+      	<a href="/index/siteinfo/?app={{$info.site}}">同步代码
+      	</a>
+      </li>
+      <li {{if $type=='version'}}class="active"{{/if}}>
+      	<a href="/index/version/?app={{$info.site}}">版本切换
+      	</a>
+      </li>
+      <li {{if $type=='log'}}class="active"{{/if}}>
+      	<a href="/index/log/?app={{$info.site}}">操作日志
+      	</a>
+      </li>
+    </ul>
+</div>
