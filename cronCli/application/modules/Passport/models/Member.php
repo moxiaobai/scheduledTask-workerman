@@ -11,8 +11,11 @@ class MemberModel extends BaseModel
 {
 
     public function getUserInfo($uid) {
+        $age = 100;
+
         $data = array(
             'uid'       => $uid,
+            'age'       => $age,
             'username'  => 'moxiaobai',
             'realname'  => '莫小白'
         );

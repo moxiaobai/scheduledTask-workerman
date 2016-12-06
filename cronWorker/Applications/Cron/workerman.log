@@ -13,3 +13,30 @@
 2016-09-26 11:17:48 Workerman[start.php] start in DEBUG mode
 2016-09-29 08:54:19 WORKER EXIT UNEXPECTED 
 2016-10-18 16:42:03 Workerman[start.php] start in DEBUG mode
+2016-12-06 09:39:53 Workerman[start.php] start in DEBUG mode
+2016-12-06 09:42:14 Workerman[start.php] start in DEBUG mode
+2016-12-06 10:10:55 Workerman[start.php] Stopping ...
+2016-12-06 10:10:57 worker[none:2307] exit with status 9
+2016-12-06 10:10:57 Workerman[start.php] has been stopped
+2016-12-06 10:11:01 Workerman[start.php] start in DEBUG mode
+2016-12-06 10:38:45 Workerman[start.php] Stopping ...
+2016-12-06 10:38:47 worker[none:2347] exit with status 9
+2016-12-06 10:38:47 Workerman[start.php] has been stopped
+2016-12-06 10:38:50 Workerman[start.php] start in DEBUG mode
+2016-12-06 10:40:38 Workerman[start.php] Stopping ...
+2016-12-06 10:40:39 Workerman[start.php] has been stopped
+2016-12-06 10:40:42 Workerman[start.php] start in DEBUG mode
+2016-12-06 10:42:48 Workerman[start.php] Stopping ...
+2016-12-06 10:42:50 Workerman[start.php] has been stopped
+2016-12-06 10:42:52 Workerman[start.php] start in DEBUG mode
+2016-12-06 10:45:27 Workerman[start.php] Stopping ...
+2016-12-06 10:45:29 worker[none:2570] exit with status 9
+2016-12-06 10:45:29 Workerman[start.php] has been stopped
+2016-12-06 10:45:32 Workerman[start.php] start in DEBUG mode
+2016-12-06 10:49:35 Workerman[start.php] Stopping ...
+2016-12-06 10:49:37 Workerman[start.php] has been stopped
+2016-12-06 10:49:40 Workerman[start.php] start in DEBUG mode
+2016-12-06 10:53:57 Workerman[start.php] Stopping ...
+2016-12-06 10:53:59 worker[none:2590] exit with status 9
+2016-12-06 10:53:59 Workerman[start.php] has been stopped
+2016-12-06 10:54:02 Workerman[start.php] start in DEBUG mode

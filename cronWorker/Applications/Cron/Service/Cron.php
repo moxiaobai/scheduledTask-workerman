@@ -71,10 +71,10 @@ class Cron {
                     $directory = $cliIni['directory'];
 
                     $file   = "{$directory}request.php";
-                    $result = exec("php {$file} request_uri='{$content}'");
-                    $ret    = json_decode($result, true);
+                    exec("php {$file} request_uri='{$content}' 2>&1", $ret);
 
-                    if($ret['code'] != 1) {
+                    $result = $ret[0];
+                    if(is_null(json_decode($result, true))) {
                         $status = 2;
                     }
 

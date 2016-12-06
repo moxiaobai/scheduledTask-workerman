@@ -10,9 +10,7 @@
 class ErrorController extends Yaf_Controller_Abstract {
     
     public function errorAction($exception) {
-        echo '<pre>';
-        print_r($exception);
-        echo '</pre>';
-        return false;
+        echo "[Message]" . $exception->getMessage() . ";[File]" . $exception->getFile() . ";[Line]" . $exception->getLine();
+        exit;
     }
 }

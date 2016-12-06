@@ -84,7 +84,7 @@
         </td>
         <td>
             {{if $row.c_state == 1}}
-            <a data-href="/index/startCron/?id={{$row.c_id}}" data-json="确认要启动该任务吗？" title="启动任务"><i class="icon-play-circle"></i>启动 </a>&nbsp;
+            <a href="#" data-href="/index/startCron/?id={{$row.c_id}}" data-json="确认要启动该任务吗？" title="启动任务"><i class="icon-play-circle"></i>启动 </a>&nbsp;
             <a href="/index/addCron/?id={{$row.c_id}}" title="编辑任务"><i class="icon-edit"></i>编辑</a>&nbsp;
             {{else}}
             <a data-href="/index/stopCron/?id={{$row.c_id}}" data-json="确认要停止该任务吗？" title="停止任务"><i class="icon-off"></i>暂停</a>&nbsp;
