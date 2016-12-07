@@ -4,12 +4,13 @@
 **功能列表:**
  1. yaf cli命令行模式执行php程序（也支持curl模式）；
  2. web在线管理计划任务，主要功能管理计划任务列表，添加用户，查看任务日志，任务异常报警提醒；
- 3. 使用workerman的定时器执行计划任务：任务循环执行，只执行一次，每天执行一次三种模式，最小 间隔时间精确到 1分钟。
+ 3. 使用workerman的定时器执行计划任务：任务循环执行，只执行一次，每天执行一次三种模式，最小 间隔时间精确到1秒。
 
 ## cronCli 基于php yaf开发的php cli命令行程序
 **示例程序:**
 ``` php
-php request.php request_uri="/pay/message/list/"''interpreter
+执行Pay 模块下面的Message控制器的List方法
+php request.php request_uri="/pay/message/list/"
 ```
 
 
@@ -30,8 +31,11 @@ php request.php request_uri="/pay/message/list/"''interpreter
 ## cronWorker基于workerman开发的计划任务
 **开启计划任务**
 ``` php
+以后台服务的形式启动
 php start.php start -d
 ```
+
+**注意事项：需要修改php.ini， 找到disable_function,去除exec和stream_socket_server方法**
 
 ![image](https://github.com/moxiaobai/scheduledTask-workerman/blob/master/doc/workerman-console.png)
 
