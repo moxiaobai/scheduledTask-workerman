@@ -153,7 +153,7 @@ class Cron {
     public static function getDbSuf($id,$num=36){
         switch($num){
             case 10:$arrsuf = array('0','1','2','3','4','5','6','7','8','9');break;
-            case 24:$arrsuf = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');break;
+            case 26:$arrsuf = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');break;
             case 36:$arrsuf = array('0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');break;
             default:throw new Exception('error num',100000);
         }

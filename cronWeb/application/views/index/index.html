@@ -50,7 +50,7 @@
         <td>
             {{if $row.c_persistent == 1}}<span class="label label-success">循环执行</span><br />
             开始时间: {{$row.c_start_time|date_format:"%Y-%m-%d %H:%M:%S"}} - 结束时间: {{$row.c_end_time|date_format:"%Y-%m-%d %H:%M:%S"}}<br />
-            间隔执行时间: {{$row.c_interval/60}}（分钟）
+            间隔执行时间: {{$row.c_interval}}（秒）
             {{else if $row.c_persistent == 2}}
             <span class="label label-info">每天执行一次</span><br />
             每天执行时间：{{$row.c_execute_time|date_format:"%H:%M"}}<br />
@@ -87,7 +87,7 @@
             <a href="#" data-href="/index/startCron/?id={{$row.c_id}}" data-json="确认要启动该任务吗？" title="启动任务"><i class="icon-play-circle"></i>启动 </a>&nbsp;
             <a href="/index/addCron/?id={{$row.c_id}}" title="编辑任务"><i class="icon-edit"></i>编辑</a>&nbsp;
             {{else}}
-            <a data-href="/index/stopCron/?id={{$row.c_id}}" data-json="确认要停止该任务吗？" title="停止任务"><i class="icon-off"></i>暂停</a>&nbsp;
+            <a href="#" data-href="/index/stopCron/?id={{$row.c_id}}" data-json="确认要停止该任务吗？" title="停止任务"><i class="icon-off"></i>暂停</a>&nbsp;
             {{/if}}
             <a href="/index/log/?id={{$row.c_id}}"  title="任务日志"><i class="icon-th-list"></i>任务日志</a>&nbsp;
             <a href="/index/alarm/?id={{$row.c_id}}"  title="任务日志"><i class="icon-bullhorn"></i>报警日志</a>

@@ -63,9 +63,7 @@ class IndexController extends Yaf_Controller_Abstract
     }
 
     //帮助说明
-    public function helpAction() {
-
-    }
+    public function helpAction() {}
 
     //添加任务
     public function addCronAction() {
@@ -165,7 +163,7 @@ class IndexController extends Yaf_Controller_Abstract
                     Helper_Json::formJson('任务执行开始时间不能大于任务结束时间!');
                 }
 
-                $data['c_interval']    = $interval * 60;
+                $data['c_interval']    = $interval;
                 $data['c_start_time']  = strtotime($startTimeOne);
                 $data['c_end_time']    = strtotime($endTimeOne);
                 break;
