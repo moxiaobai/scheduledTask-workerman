@@ -15,7 +15,7 @@ class IndexController extends Yaf_Controller_Abstract
 
     private $_state   = array(1=>'未运行', 2=>'运行');
     private $_status  = array(1=>'正常', 2=>'禁用');
-    private $_type    = array(1=>'Curl', 2=>'Cli');
+    private $_type    = array(1=>'Curl', 2=>'Yaf-Cli', 3=>'php-Cli');
 
     public function init()
     {
@@ -32,7 +32,7 @@ class IndexController extends Yaf_Controller_Abstract
         $title    = isset($_GET['title']) ? $_GET['title'] : '';
         $content  = isset($_GET['content']) ? $_GET['content'] : '';
         $did      = isset($_GET['did']) ? intval($_GET['did']) : '';
-        $state    = isset($_GET['state']) ? intval($_GET['state']) : 2;
+        $state    = isset($_GET['state']) ? intval($_GET['state']) : '';
         $status   = isset($_GET['status']) ? intval($_GET['status']) : 1;
 
 

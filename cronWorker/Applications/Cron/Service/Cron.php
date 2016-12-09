@@ -64,12 +64,26 @@ class Cron {
 
                     break;
                 case 2:
-                    //php cli
-                    $cliIni    = Config::get('application', "cli");
+                    //php yaf cli
+                    $cliIni    = Config::get('application', "yafCli");
                     $directory = $cliIni['directory'];
 
                     $file   = "{$directory}request.php";
                     exec("php {$file} request_uri='{$content}' 2>&1", $ret);
+
+                    $result = $ret[0];
+                    if(is_null(json_decode($result, true))) {
+                        $status = 2; //状态为2表示失败
+                    }
+
+                    break;
+                case 3:
+                    //php cli
+                    $cliIni    = Config::get('application', "phpCli");
+                    $directory = $cliIni['directory'];
+
+                    $file   = "{$directory}$content";
+                    exec("php {$file} 2>&1", $ret);
 
                     $result = $ret[0];
                     if(is_null(json_decode($result, true))) {

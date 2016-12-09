@@ -61,3 +61,7 @@
 2016-12-09 09:41:33 Workerman[start.php] Stopping ...
 2016-12-09 09:41:35 Workerman[start.php] has been stopped
 2016-12-09 09:41:44 Workerman[start.php] start in DEBUG mode
+2016-12-09 11:32:30 Workerman[start.php] Stopping ...
+2016-12-09 11:32:32 worker[none:19886] exit with status 9
+2016-12-09 11:32:33 Workerman[start.php] has been stopped
+2016-12-09 11:32:35 Workerman[start.php] start in DEBUG mode
