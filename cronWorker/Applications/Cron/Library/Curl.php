@@ -28,7 +28,7 @@ class Curl {
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE); //返回状态码
 
         $msg = null;
-        if($result === false) {
+        if($result === FALSE) {
             $msg = curl_error($ch);
         }
         curl_close($ch);

@@ -57,11 +57,9 @@ class Cron {
                     $httpCode       = $responseResult['code'];
                     $msg            = $responseResult['msg'];
 
-                    //任务返回数据
-                    $ret = json_decode($result, true);
-
-                    if(!is_null($msg) || $httpCode != 200 || $ret['code'] != 1) {
-                        $status = 2;
+                    if(!is_null($msg) || $httpCode != 200) {
+                        $status = 2; //状态为2表示失败
+                        $result = $msg;
                     }
 
                     break;
@@ -75,7 +73,7 @@ class Cron {
 
                     $result = $ret[0];
                     if(is_null(json_decode($result, true))) {
-                        $status = 2;
+                        $status = 2; //状态为2表示失败
                     }
 
                     break;
@@ -95,7 +93,6 @@ class Cron {
                 $alarm = new Alarm();
                 $alarm->noticeProgrammer($uid, $data, $alarmNumber);
             }
-
 
             //记录定时任务执行日志
             $log = array(
