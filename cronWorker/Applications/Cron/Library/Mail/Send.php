@@ -26,8 +26,10 @@ class Mail_Send {
 	const SERVER_HOST = 'smtp.exmail.qq.com';
 	const SERVER_PORT = 25;
 
+	//邮件配置
 	private $_project = array(
-		'tech'    => array('fromEmail'=>'tech@comylife.com', 'password'=>'Hmyj2016', 'fromName'=>'研发中心'),
+		//@todo 邮件自行配置
+		'tech'    => array('fromEmail'=>'', 'password'=>'', 'fromName'=>'研发中心'),
 	);
 	
 	/**

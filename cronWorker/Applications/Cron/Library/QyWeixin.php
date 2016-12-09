@@ -8,6 +8,9 @@
  * @since : 2016-01-25 
  */
 
+define('CORP_ID', '');
+define('CORP_SECRET', '');
+
 class QyWeixin {
 
     /**
@@ -34,8 +37,9 @@ class QyWeixin {
 
     //获取token
     public static function getToken() {
-        $corpid     = "wxf9f138ce3059d156";
-        $corpsecret = "7g9dpZ5_sCNkAnA3OQQpflOmc7f26EzQ03BjBu47ROk5MPRucxv03VZjbx5sHFkV";
+        //@todo 自行配置
+        $corpid     = CORP_ID;
+        $corpsecret = CORP_SECRET;
         $url = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={$corpid}&corpsecret={$corpsecret}";
 
         $ret = self::curlGet($url);
