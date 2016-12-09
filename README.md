@@ -13,6 +13,11 @@
 php request.php request_uri="/pay/message/list/"
 ```
 
+## phpCli 普通模式php cli命令行程序
+**示例程序:**
+``` php
+php User.php
+```
 
 ## cronWeb 基于php yaf开发的web管理工具
 
