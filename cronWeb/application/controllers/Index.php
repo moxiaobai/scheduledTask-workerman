@@ -32,8 +32,8 @@ class IndexController extends Yaf_Controller_Abstract
         $title    = isset($_GET['title']) ? $_GET['title'] : '';
         $content  = isset($_GET['content']) ? $_GET['content'] : '';
         $did      = isset($_GET['did']) ? intval($_GET['did']) : '';
-        $state    = isset($_GET['state']) ? intval($_GET['state']) : '';
-        $status   = isset($_GET['status']) ? intval($_GET['status']) : '';
+        $state    = isset($_GET['state']) ? intval($_GET['state']) : 2;
+        $status   = isset($_GET['status']) ? intval($_GET['status']) : 1;
 
 
         $where = array('id'=>$id, 'title' => $title, 'did'=>$did, 'state'=>$state, 'status'=>$status, 'content'=>$content);
@@ -56,7 +56,7 @@ class IndexController extends Yaf_Controller_Abstract
             'director'       => $director,
             'directorOption' => Helper_Form::select('did', $director, $did, '请选择任务负责人'),
             'state'          => Helper_Form::select('state', $this->_state, $state, '请选择运行状态'),
-            'status'         => Helper_Form::select('status', $this->_status, $state, '请选择任务状态'),
+            'status'         => Helper_Form::select('status', $this->_status, $status, '请选择任务状态'),
             'data'           => $data,
             'total'          => $total,
         ));
@@ -296,6 +296,25 @@ class IndexController extends Yaf_Controller_Abstract
         $ret = fgets($client);
         fclose($client);
         return json_decode($ret, true);
+    }
+
+    public function trashAction() {
+        $id   = isset($_GET['id']) ? intval($_GET['id']) : 0;
+        if($id == 0) {
+            Helper_Json::formJson('任务ID为空');
+        }
+
+        //任务当前情况
+        $info = $this->_cronModel->getCronById($id);
+        if(!$info) {
+            Helper_Json::formJson('任务不存在');
+        }
+
+        if($info['c_state'] != 1) {
+            Helper_Json::formJson('任务正在运行，不能移除');
+        }
+
+        //更改状态
     }
 
     //任务日志

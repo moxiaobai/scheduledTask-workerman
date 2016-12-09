@@ -84,7 +84,7 @@ class CronModel extends BaseModel {
     }
 
     /**
-     * 删除文章
+     * 更改状态
      *
      * @param $id     任务ID
      * @return mixed
