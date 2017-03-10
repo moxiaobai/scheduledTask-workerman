@@ -16,13 +16,13 @@ class Alarm {
     private $_db;
 
     //通知开关
-    private $_switch;
+    private $_config;
 
     public function __construct()
     {
         $this->_db = Mysql::instance('cron');
 
-        $this->_switch = Config::get('application', 'notice.switch');
+        $this->_config = Config::get('application');
     }
 
     /**
@@ -40,20 +40,19 @@ class Alarm {
 
         //达到报警次数，不再报警
         if($alarmNumber >= $this->countTodayAlarm($data['c_id'])) {
+            $content = "定时任务出错，请尽快处理！！！\n\n";
+            $content .= "任务ID:" .  $data['c_id'] . "\n";
+            $content .= "名称: " . $data['c_title'] . "\n";
+            $content .= "内容: " . $data['c_content'] . "\n\n";
+            $content .= "报警时间：" . date('Y-m-d H:i:s');
+
             //企业号通知
-            if($this->_switch['qyWeixin'] == 1) {
-                $content = "定时任务出错，请尽快处理！！！\n\n";
-
-                $content .= "任务ID:" .  $data['c_id'] . "\n";
-                $content .= "名称: " . $data['c_title'] . "\n";
-                $content .= "内容: " . $data['c_content'] . "\n\n";
-
-                $content .= "报警时间：" . date('Y-m-d H:i:s');
+            if($this->_config['noticeSwitch']['qyWeixin'] == 1) {
                 QyWeixin::sendMessage($userInfo['u_username'], $content);
             }
 
             //邮箱通知
-            if($this->_switch['email'] == 1) {
+            if($this->_config['noticeEmail']['email'] == 1) {
                 $this->sendEmail($userInfo['u_email'], '定时任务系统出错，请火速处理', str_replace("\n", "<br />", $content));
             }
 
@@ -74,11 +73,11 @@ class Alarm {
 
         $ini = Config::get('application', 'notice.email');
         foreach($ini as $key => $val) {
-            if($this->_switch['qyWeixin'] == 1) {
+            if($this->_config['noticeEmail']['email'] == 1) {
                 QyWeixin::sendMessage($key, $content);
             }
 
-            if($this->_switch['email'] == 1) {
+            if($this->_config['noticeEmail']['email'] == 1) {
                 $this->sendEmail($val, '定时任务系统关闭', $content);
             }
         }
