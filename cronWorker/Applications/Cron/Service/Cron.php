@@ -62,6 +62,10 @@ class Cron {
                         $result = $msg;
                     }
 
+                    if(is_null(json_decode($result, true))) {
+                        $status = 2; //状态为2表示失败
+                    }
+
                     break;
                 case 2:
                     //php yaf cli
