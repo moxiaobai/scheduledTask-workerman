@@ -52,7 +52,7 @@ class Alarm {
             }
 
             //邮箱通知
-            if($this->_config['noticeEmail']['email'] == 1) {
+            if($this->_config['noticeSwitch']['email'] == 1) {
                 $this->sendEmail($userInfo['u_email'], '定时任务系统出错，请火速处理', str_replace("\n", "<br />", $content));
             }
 
