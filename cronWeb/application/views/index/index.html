@@ -61,7 +61,13 @@
             {{/if}}
         </td>
         <td>
-            {{if $row.c_type == 1}}<span class="badge badge-success">Curl方式运行</span>{{else}}<span class="badge badge-info">Cli方式运行</span>{{/if}}<br />
+            {{if $row.c_type == 1}}
+            <span class="badge badge-success">Curl方式运行</span>
+            {{elseif $row.c_type ==2}}
+            <span class="badge badge-info">YAF-Cli方式运行</span>
+            {{else}}
+            <span class="badge badge-info">PHP-Cli方式运行</span>
+            {{/if}}<br />
             {{$row.c_content}}
         </td>
         <td>
